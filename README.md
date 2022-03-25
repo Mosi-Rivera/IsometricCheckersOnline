@@ -1,29 +1,31 @@
-# Welcome to Colyseus!
+<br />
+<div align="center">
+  <h3 align="center">Isometric Checkers Online</h3>
 
-This project has been created using [⚔️ `create-colyseus-app`](https://github.com/colyseus/create-colyseus-app/) - an npm init template for kick starting a Colyseus project in TypeScript.
+  <p align="center">
+    Checkers with a little twist.
+    <br />
+    <a href="https://mosi-rivera.github.io/IsometricCheckersOnline/">View Demo</a>
+    ·
+    <a href="https://github.com/Mosi-Rivera/IsometricCheckersOnline/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/Mosi-Rivera/IsometricCheckersOnline/issues">Request Feature</a>
+  </p>
+</div>
 
-[Documentation](http://docs.colyseus.io/)
+### Built With
 
-## :crossed_swords: Usage
+* [TypeScript](https://www.typescriptlang.org/)
+* [Colyseus](https://www.colyseus.io/)
+* [Express](https://expressjs.com/es/)
+* [Node.js](https://nodejs.org/)
+* [Bootstrap](https://getbootstrap.com/)
+* CSS
+* JavaScript
+* HTML5
 
-```
-npm start
-```
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## Structure
+<a href="https://mosi-rivera.github.io/IsometricCheckersOnline/">View Menu</a>
 
-- `index.ts`: main entry point, register an empty room handler and attach [`@colyseus/monitor`](https://github.com/colyseus/colyseus-monitor)
-- `src/rooms/MyRoom.ts`: an empty room handler for you to implement your logic
-- `src/rooms/schema/MyRoomState.ts`: an empty schema used on your room's state.
-- `loadtest/example.ts`: scriptable client for the loadtest tool (see `npm run loadtest`)
-- `package.json`:
-    - `scripts`:
-        - `npm start`: runs `ts-node-dev index.ts`
-        - `npm test`: runs mocha test suite
-        - `npm run loadtest`: runs the [`@colyseus/loadtest`](https://github.com/colyseus/colyseus-loadtest/) tool for testing the connection, using the `loadtest/example.ts` script.
-- `tsconfig.json`: TypeScript configuration file
-
-
-## License
-
-MIT
+<p align="right">(<a href="#top">back to top</a>)</p>
