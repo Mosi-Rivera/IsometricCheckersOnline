@@ -3,6 +3,7 @@ body
 {
     padding: 0px;
     margin: 0px;
+    overflow: hidden;
 }
 
 button
@@ -14,12 +15,13 @@ button
 {
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: black;
     position:relative;
 }
 
 canvas
 {
+    z-index: 1;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -29,4 +31,106 @@ canvas
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+}
+
+#chat
+{
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    box-sizing: border-box;
+    max-width: 300px;
+    padding: 1rem;
+    background-color: #0000009f;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+#chat-header
+{
+    margin: -1rem -1rem;
+    margin-bottom: 0px;
+    height: 1.5rem;
+    width: calc(100% + 2rem);
+    background-color: #3A3F5D;
+}
+
+#chat .display
+{
+    overflow-y: scroll;
+    list-style-type: none;
+    padding: 1rem;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 800;
+    width: 100%;
+    max-height: 25vh;
+    box-sizing: border-box;
+    background-color: #3A3F5D;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#chat .minimize
+{
+    position: relative;
+    float: right;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: 2px solid #ffcd0b;
+    box-sizing: border-box;
+    color: #ffcd0b;
+    font-weight: 800;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1rem;
+    cursor: pointer;
+    
+}
+
+.display div
+{
+    display: inline;
+    margin-left: 0.5rem;
+}
+
+.display span
+{
+    color: #ffcd0b;
+}
+
+.display span::before
+{
+    content: "(";
+    display: inline;
+}
+
+.display span::after
+{
+    content: ")";
+    display: inline;
+}
+
+#chat textarea
+{
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    background-color: #f5f5f538;
+    color: #ffcd0b;;
+    font-weight: 600;
+    padding: 0.5rem;
+}
+
+#chat textarea::placeholder
+{
+    color: #ffcd0b;
+}
+
+#chat textarea:hover
+{
+    background-color: #f5f5f548;
 }

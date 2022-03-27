@@ -3,6 +3,7 @@ import { Schema, type, ArraySchema } from "@colyseus/schema";
 export class GameState extends Schema {
     @type("string") playerOne: string;
     @type("string") currentTurn: string;
+    @type("number") continueIndex: number = -1;
     @type(["number"]) board: ArraySchema<number> = new ArraySchema(
         0,1,0,2,0,3,0,4,
         5,0,6,0,7,0,8,0,

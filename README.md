@@ -19,7 +19,6 @@
 * [Colyseus](https://www.colyseus.io/)
 * [Express](https://expressjs.com/es/)
 * [Node.js](https://nodejs.org/)
-* [Bootstrap](https://getbootstrap.com/)
 * CSS
 * JavaScript
 * HTML5

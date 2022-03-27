@@ -58,7 +58,6 @@ let LIB = {};
             this.virtual_width = w;
             this.virtual_height = h;
             this.resize();
-            console.log(this);
         }
         resize()
         {
@@ -105,6 +104,51 @@ let LIB = {};
         {
             this.scale_manager = game.scale_manager;
             this.ctx = game.ctx;
+        }
+        drawBackground(key)
+        {
+            let sprite = this.sprites[key];
+            let {
+                scale_x,
+                scale_y,
+                offset_x,
+                offset_y,
+                virtual_width,
+                virtual_height
+            } = this.scale_manager;
+            let {width,height} = sprite;
+            let w = Math.ceil(virtual_width / width);
+            let h = Math.ceil(virtual_height / height);
+            for (let x = w; x--;)
+            {
+                for (let y = h; y--;)
+                {
+                    this.ctx.drawImage(
+                        sprite,
+                        offset_x + x * 32 * scale_x,
+                        offset_y + y * 32 * scale_y,
+                        sprite.width * scale_x,
+                        sprite.height * scale_y
+                    );
+                }
+            }
+        }
+        drawSprite(key,x,y)
+        {
+            let sprite = this.sprites[key];
+            let {
+                scale_x,
+                scale_y,
+                offset_x,
+                offset_y
+            } = this.scale_manager;
+            this.ctx.drawImage(
+                sprite,
+                Math.round(offset_x + x * scale_x),
+                Math.round(offset_y + y * scale_y),
+                Math.round(sprite.width * scale_x),
+                Math.round(sprite.height * scale_y)
+            );
         }
         drawSection(key,x,y)
         {
@@ -154,23 +198,80 @@ let LIB = {};
             return result;
         }
     }
+    class Button
+    {
+        x;
+        y;
+        w;
+        h;
+        input_manager;
+        game;
+        constructor(game,config)
+        {
+            this.x = config.x;
+            this.y = config.y;
+            this.w = config.w;
+            this.h = config.h;
+            this.section_key = config.section_key;
+            if (config.update)
+                this.update = update.bind(this);
+            if (config.draw)
+                this.draw = config.draw.bind(this);
+            this.onclick = config.onclick;
+            this.input_manager = game.input_manager;
+            this.game = game;
+        }
+        update(dt)
+        {
+            if (this.isMouseHovering() && this.input_manager.click)
+                this.onclick();
+        }
+        draw()
+        {
+            graphics.drawSection(this.section_key,this.x,this.y);
+        }
+        isMouseHovering()
+        {
+            let {x,y} = this.game.input_manager;
+            return !(
+                x < this.x ||
+                x > this.x + this.w ||
+                y < this.y ||
+                y > this.y + this.h
+            );
+        };
+    }
+    LIB.Button = Button;
     class InputManager
     {
-        x = 0;
-        y = 0;
+        x = -100;
+        y = -100;
         constructor(game)
         {
             this.game = game;
             document.addEventListener('mouseup',this.mouseup.bind(this));
+            document.addEventListener('mousedown',this.mousedown.bind(this));
             document.addEventListener('mousemove',this.mousemove.bind(this));
+        }
+        setHover(b)
+        {
+            this.hover = b;
+        }
+        mousedown()
+        {
+            this.down = true;
+            this.click = true;
         }
         mouseup()
         {
-            this.click = true;
+            this.down = false;
+            this.click = false;
         }
         mousemove(e)
         {
             let scale_manager = this.game.scale_manager;
+            this.tx = e.clientX;
+            this.ty = e.clientY;
             this.x = (e.clientX - scale_manager.offset_x) / scale_manager.scale_x;
             this.y = (e.clientY - scale_manager.offset_y) / scale_manager.scale_x;
             
@@ -178,6 +279,11 @@ let LIB = {};
         update()
         {
             this.click = false;
+            this.hover = false;
+        }
+        draw(graphics)
+        {
+            // graphics.drawSection(this.hover ? 'cursor-hover' : 'cursor',this.x,this.y);
         }
     }
     LIB.Game = class
@@ -219,6 +325,8 @@ let LIB = {};
                 this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
                 this.scene_manager.update(delta);
                 this.scene_manager.draw(this.graphics);
+                this.input_manager.draw(this.graphics);
+                this.input_manager.update();
             }
             if (this.raf_index !== null)
                 this.raf_index = requestAnimationFrame(this.update.bind(this));
