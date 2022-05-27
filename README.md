@@ -4,8 +4,9 @@
 
   <p align="center">
     Checkers with a little twist.
+    Odds are there is nobody else playing this so if you want to test it out open two tabs and play yourself.
     <br />
-    <a href="https://mosi-rivera.github.io/IsometricCheckersOnline/">View Demo</a>
+    <a href="https://isometriccheckers.herokuapp.com/">View Demo</a>
     ·
     <a href="https://github.com/Mosi-Rivera/IsometricCheckersOnline/issues">Report Bug</a>
     ·
