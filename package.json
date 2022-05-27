@@ -12,7 +12,7 @@
     "clean": "node node_modules/rimraf/bin lib",
     "test": "mocha --require ts-node/register test/**_test.ts --exit --timeout 15000",
     "deploy": "git add . && git commit -m Heroku && git push heroku master",
-    "copyFile": "@powershell Copy-Item 'src\\dist\\assets' -Destination 'lib\\dist\\assets' -Recurse && @powershell Copy-Item 'src\\dist\\styles' -Destination 'lib\\dist\\styles' -Recurse && @powershell Copy-Item 'src\\dist\\views' -Destination 'lib\\dist\\views' -Recurse"
+    "copyFile": "cp -r ./src/dist/assets ./src/dist/styles ./src/dist/views ./lib/dist"
   },
   "author": "",
   "license": "UNLICENSED",
