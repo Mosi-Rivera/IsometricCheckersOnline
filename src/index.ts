@@ -5,7 +5,7 @@ import ChatRoom from './rooms/chat/ChatRoom';
 import GameRoom from './rooms/game/GameRoom';
 import path from 'path';
 
-const port = Number(process.env.port) || 3000;
+const port = Number(process.env.PORT) || 3000;
 
 const app = express();
 app.use(express.json());
