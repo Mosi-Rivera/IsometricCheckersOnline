@@ -3,7 +3,7 @@ let joinChatRoom;
 (function(){
     let TEXT_AREA = document.getElementById('chat-text-area');
     let CHAT_DISPLAY = document.getElementById('chat-display');
-    var client = new Colyseus.Client('ws://localhost:3000');
+    var client = new Colyseus.Client('ws://isometriccheckers.herokuapp.com/');
     let sendMessage = () => true;
     let sendMessageFunc = room => str => room.send('message',str);
 
